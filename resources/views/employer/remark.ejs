@@ -1,0 +1,56 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="margin: 0 8vw 0 8vw;">
+    <a class="navbar-brand" href="/employer/home"><span style="color: #09c;">getwork</span><span style="color: rgb(59, 248, 59);">.com</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/employer/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+        <% if(user) {  %> 
+          <form id="logout" action="/logout" method="POST">
+          <a class="nav-link active" aria-current="page" onclick="document.getElementById('logout').submit() " href="#">Sign out </a>
+        </form>
+          <% } else { %>  <a class="nav-link active" aria-current="page" href="/login" >Sign In </a><% } %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<img src="/img/labour-bg.webp" class="bd-placeholder-img bd-placeholder-img-lg img-fluid" style="height: 550px;" width="100%">
+
+
+
+<div class="modal modal-signin position-static d-block py-5" tabindex="-1" role="dialog" id="modalSignin" style="margin-top: -200px;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-5 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h2 class="fw-bold mb-0">Feedback For Work</h2>
+        </div>
+  
+        <div class="modal-body p-5 pt-0">
+          <form action="/remark" method="POST">
+            <div class="form-floating mb-3">
+              <input type="number" class="form-control rounded-4" id="floatingInput" placeholder="rating" name="workRating">
+              <label for="floatingInput">Give Rating 1-5</label>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control rounded-4" id="floatingInput" rows="3" placeholder="remark" name="workRemark"></textarea>
+                <label for="floatingInput">Remarks</label>
+              </div>
+              <input type="hidden" name="jobDone" value="<%= jobDone %>">
+              <input type="hidden" name="jobId" value="<%= jobId %>">
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> 

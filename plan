@@ -1,0 +1,8 @@
+ejs - template engine 
+yarn init 
+yarn add exrpress ejs express-ejs-layouts 
+nodemon(dev dependency) so yarn add nodemon -D
+to remove yarn remove nodemon 
+laravel mix -> latest js to browser understandable 
+flash uses session
+ middle ware can be use as app.use and session is a middle ware 

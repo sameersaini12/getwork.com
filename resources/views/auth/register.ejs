@@ -1,0 +1,81 @@
+<body class="bg-light">
+<div class="container" style="margin-top: 50px;">
+    <main>
+      <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Register to getwork</h4>
+          <form class="needs-validation" novalidate action="/register" method="POST">
+            
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="role" class="form-label">Profession</label>
+                 <select class="form-select" id="role" required name="role">
+                    <option selected>Worker</option>
+                    <option>Employer</option>
+                 </select>
+              </div>
+              <div class="col-12">
+                <label for="firstName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="" value="" name="name" required>
+              </div>
+  
+              <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+              </div>
+
+              <div class="col-12">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password@1234">
+              </div>
+
+              <div class="col-12">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="1234567890" required>
+              </div>
+  
+              <div class="col-md-5">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" id="country" required name="country">
+                  <option value="">Choose...</option>
+                  <option>India</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a valid country.
+                  </div>
+              </div>
+  
+              <div class="col-md-4">
+                <label for="state" class="form-label">State</label>
+                <select class="form-select" id="state" required name="state">
+                  <option value="">Choose...</option>
+                  <option>Haryana</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please provide a valid state.
+                  </div>
+              </div>
+  
+              <div class="col-md-3">
+                <label for="zip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="zip" placeholder="" required name="zipcode">
+              </div>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+  
+            <hr class="my-4">
+  
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Register to getwork</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  
+    
+  </div>
+</body>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="margin: 0 8vw 0 8vw;">
+    <a class="navbar-brand" href="/employer/home"><span style="color: #09c;">getwork</span><span style="color: rgb(59, 248, 59);">.com</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/employer/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#about">About</a>
+        </li>
+        <li class="nav-item">
+        <% if(user) {  %> 
+          <form id="logout" action="/logout" method="POST">
+          <a class="nav-link active" aria-current="page" onclick="document.getElementById('logout').submit() " href="#">Sign out </a>
+        </form>
+          <% } else { %>  <a class="nav-link active" aria-current="page" href="/login" >Sign In </a><% } %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div style= "border: 4px solid grey; margin: 100px; border-radius: 20px; height: auto;" > 
+<h2 style="margin-top: 60px; text-align: center; font-weight: 100;">Previous Jobs</h2>
+<% if(jobs.length) { %> 
+    <div class="table-responsive" style="height: 100vh; margin-top: 60px; font-weight: 400;">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">S.No.</th>
+              <th scope="col">Work Name</th>
+              <th scope="col">Work Location</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Total Wage</th>
+              <th scope="col">Contact Person</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Resume</th>
+              <th scope="col">Give Remarks</th>
+            </tr>
+          </thead>
+          <tbody>
+              <% count =1;%>
+            <% jobs.forEach((job) => {  %>
+                <tr>
+                    <td><%= count %></td>
+                    <td><%= job.workName %></td>
+                    <td><%= job.workLocation %></td>
+                    <td><%= job.expectedDuration %></td>
+                    <td><%= job.totalWage %></td>
+                    <td><%= job.contactPerson%></td>
+                    <td><%= job.contactNumber %></td>
+                    <td><a href="http://localhost:3000/<%= job.jobDonePdf %>"><%= job.jobDonePdf %></a></td>
+                    <td>
+                      <% if(job.status==="Not Done") { %> 
+                        <button style="width: 100%;">Not Applied yet</button>
+                     
+                     <% } else if (!job.remarksDone) { %>
+                        <form action="/giveremarks" method="POST">
+                          <input type="hidden" name="jobDone" value="<%= job.jobDone %>" >
+                          <input type="hidden" name="jobId" value="<%= job._id %>" >
+                          <button type="submit" style="width: 100%;">Give Remarks</button>
+                        </form>
+                      <% } else { %>
+                        <button style="width: 100%;">Done</button>
+                        <% } %>
+                    </td>
+                  </tr>
+                  <% count = count +1; %>
+            <%  }) %>
+          </tbody>
+        </table>
+    </div>
+</div>
+<% } %>

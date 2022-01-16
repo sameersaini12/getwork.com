@@ -1,0 +1,31 @@
+<body class="bg-light">
+<div class="container" style="height:100vh; margin-top: 50px; width: 50%; margin-left: 35%;">
+    <main>
+      <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Login to getwork</h4>
+          <form class="needs-validation" novalidate action="/login" method="POST">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                  </div>
+              </div>
+              <div class="col-12">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="password@1234">
+              </div>
+            <hr class="my-4">
+  
+            <button class="w-100 btn btn-primary btn-lg" type="submit">Login to getwork.com</button>
+          </form>
+        </div>
+        <a href="/register" style="margin-left: 30%; ">New user? Register here!!</a>
+      </div>
+    </main>
+  
+    
+  </div>
+</body>

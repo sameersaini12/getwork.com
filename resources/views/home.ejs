@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid" style="margin: 0 8vw 0 8vw;">
+    <a class="navbar-brand" href="/"><span style="color: #09c;">getwork</span><span style="color: rgb(59, 248, 59);">.com</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#about">About</a>
+        </li>
+        <% if(user && user.role==='Worker') { %>
+          <li data-user="<%= JSON.stringify(user) %>" id="getpdf" class="nav-link active" aria-current="page" style="cursor: pointer;">Download Resume</li>
+        <% } %>
+        <li class="nav-item">
+        <% if(user) {  %> 
+          <form id="logout" action="/logout" method="POST">
+          <a class="nav-link active" aria-current="page" onclick="document.getElementById('logout').submit() " href="#">Sign out </a>
+        </form>
+          <% } else { %>  <a class="nav-link active" aria-current="page" href="/login" >Sign In </a><% } %>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="bd-example">
+  <img src="/img/labour-bg.webp" class="bd-placeholder-img bd-placeholder-img-lg img-fluid" style="height: 550px;" width="100%" >
+
+  </div>
+  <div class="album py-5 bg-light" style="margin-top: -150px;">
+    <div class="container">
+      <% if(jobs.length) { %>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <% jobs.forEach((job) => {  %>
+        <div class="col">
+          <div class="card shadow-sm" style="font-size: 14px; color:#666;" >
+            <div class="card-upper" style=" margin: 10px; display: flex; flex-direction: row;">
+            <img width="25%"style=""  src="https://naukrirecruiter.naukri.com/profilePic/getpic?pid=1475047038rp2915638_medium4" /> 
+            <div class="card-upper-info" style="margin-left: 10px; text-transform: capitalize; display: flex; flex-direction: column;">
+              <span style="color: #09c; margin-bottom: 15px;"><%= job.contactPerson %></span>
+              <span style="color: #666;"><img src="img/1831922.svg" style="height:17px; margin-bottom: 4px;">&nbsp;<%= job.contactNumber %></span>
+              <span style="color: #09c;"><img src="img/154904.svg" style="height:17px; margin-bottom: 4px;">&nbsp;<%= job.workName %></span>
+              <span style="color: #666;"><img src="img/304467.svg" style="height:17px; margin-bottom: 4px;">&nbsp;
+              <%= job.workLocation %></span>
+            </div>
+          </div>
+            <div class="card-body" style="font-size: 13px;">
+              <span style="color: #999;">Job Description:</span>
+              <p class="card-text" style="display: flex; flex-direction: column; margin-left: 20px;">
+              <span>Expected Duration : <%= job.expectedDuration %></span>
+              <span>Total Wage : <%= job.totalWage %></span>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">Last update at <%= moment(job.updatedAt).fromNow() %></small>
+              </div>
+            </div>
+            <div class="" style="background-color: #f9f9f9; padding: 14px; display: flex; flex-direction: row; justify-content: space-between;">
+              <% if(job.status==='Not Done' && user) { %> 
+                <form action="/applyjob" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="jobId" value="<%= job._id %>">
+                    <input type="file" name="resumeupload">
+                    <button style="margin-left: 40px;" class="btn btn-outline-success" type="submit">Apply</button>
+                </form>
+                <!-- <form action="/sendmessage" method="POST">
+                  <input type="hidden"  name="userId" value="<%= session.passport.user %>">
+                  <input type="hidden" name="jobOwner" value="<%= job.jobOwner %>">
+                  <button class="btn btn-outline-primary" type="submit">Send message</button>
+              </form> -->
+                <% } else { %> 
+                    <a class="btn btn-outline-success" href="/login">Please login Yourself</a>
+                <% } %>
+            </div>
+          </div>
+        </div>
+        <%  }) %>
+      </div>
+      <% } %>
+    </div>
+  </div>
